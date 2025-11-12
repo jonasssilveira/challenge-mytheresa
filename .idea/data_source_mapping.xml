@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourcePerFileMappings">
+    <file url="file://$PROJECT_DIR$/sql/006-product-foreign-key copy.sql" value="c207e4bb-b7c3-431b-8e65-c4c03ebb0449" />
+    <file url="file://$PROJECT_DIR$/sql/007-product-category-data.sql" value="c207e4bb-b7c3-431b-8e65-c4c03ebb0449" />
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/c207e4bb-b7c3-431b-8e65-c4c03ebb0449/console_1.sql" value="c207e4bb-b7c3-431b-8e65-c4c03ebb0449" />
+  </component>
+</project>
