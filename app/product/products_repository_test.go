@@ -11,6 +11,12 @@ import (
 	"gorm.io/gorm"
 )
 
+var (
+	OneHundred          float64 = 100
+	OneHundredAndTwenty float64 = 120
+	One                 float64 = 1
+)
+
 func setupTestDB(t *testing.T) *gorm.DB {
 	db, err := gorm.Open(sqlite.Open(":memory:"), &gorm.Config{})
 	if err != nil {
@@ -277,6 +283,7 @@ func TestGetProductByCode(t *testing.T) {
 }
 
 func TestGetProductsWithFilter(t *testing.T) {
+
 	tests := []struct {
 		name           string
 		filter         ProductFilter
@@ -318,7 +325,7 @@ func TestGetProductsWithFilter(t *testing.T) {
 		{
 			name: "filters by price less than",
 			filter: ProductFilter{
-				PriceLessThan: 100.00,
+				PriceLessThan: &OneHundred,
 				Offset:        0,
 				Limit:         10,
 			},
@@ -328,7 +335,7 @@ func TestGetProductsWithFilter(t *testing.T) {
 			expectError:   false,
 			validateResult: func(t *testing.T, result ProductListResult) {
 				for _, prod := range result.Products {
-					assert.True(t, prod.Price.LessThan(decimal.NewFromFloat(100.00)),
+					assert.True(t, prod.Price.LessThan(decimal.NewFromFloat(OneHundred)),
 						"Product %s price should be less than 100.00", prod.Code)
 				}
 			},
@@ -337,7 +344,7 @@ func TestGetProductsWithFilter(t *testing.T) {
 			name: "combines category and price filters",
 			filter: ProductFilter{
 				CategoryCode:  "clothing",
-				PriceLessThan: 120.00,
+				PriceLessThan: &OneHundredAndTwenty,
 				Offset:        0,
 				Limit:         10,
 			},
@@ -391,7 +398,7 @@ func TestGetProductsWithFilter(t *testing.T) {
 		{
 			name: "returns empty result for very low price filter",
 			filter: ProductFilter{
-				PriceLessThan: 1.00,
+				PriceLessThan: &One,
 				Offset:        0,
 				Limit:         10,
 			},
