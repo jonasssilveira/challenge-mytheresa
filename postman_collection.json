@@ -1,0 +1,324 @@
+{
+	"info": {
+		"_postman_id": "go-hiring-challenge-collection",
+		"name": "Go Hiring Challenge - Product Catalog API",
+		"description": "API endpoints for the Go Hiring Challenge product catalog system",
+		"schema": "https:"
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http:",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "Catalog",
+			"item": [
+				{
+					"name": "Get All Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/catalog",
+							"host": ["{{base_url}}"],
+							"path": ["catalog"]
+						},
+						"description": "Retrieve all products with their categories and variants. Returns paginated results with total count."
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Products with Pagination",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/catalog?offset=0&limit=10",
+							"host": ["{{base_url}}"],
+							"path": ["catalog"],
+							"query": [
+								{
+									"key": "offset",
+									"value": "0",
+									"description": "Number of items to skip (default: 0)"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Number of items to return (default: 10, min: 1, max: 100)"
+								}
+							]
+						},
+						"description": "Get products with pagination. Offset specifies how many items to skip, limit specifies how many to return."
+					},
+					"response": []
+				},
+				{
+					"name": "Filter Products by Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/catalog?category=clothing",
+							"host": ["{{base_url}}"],
+							"path": ["catalog"],
+							"query": [
+								{
+									"key": "category",
+									"value": "clothing",
+									"description": "Filter by category code (e.g., clothing, shoes, accessories)"
+								}
+							]
+						},
+						"description": "Filter products by category code. Returns only products in the specified category."
+					},
+					"response": []
+				},
+				{
+					"name": "Filter Products by Price",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/catalog?priceLessThan=50",
+							"host": ["{{base_url}}"],
+							"path": ["catalog"],
+							"query": [
+								{
+									"key": "priceLessThan",
+									"value": "50",
+									"description": "Filter products with price less than specified value"
+								}
+							]
+						},
+						"description": "Filter products by price. Returns only products with price less than the specified value."
+					},
+					"response": []
+				},
+				{
+					"name": "Filter Products - Combined Filters",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/catalog?category=clothing&priceLessThan=100&offset=0&limit=5",
+							"host": ["{{base_url}}"],
+							"path": ["catalog"],
+							"query": [
+								{
+									"key": "category",
+									"value": "clothing",
+									"description": "Filter by category code"
+								},
+								{
+									"key": "priceLessThan",
+									"value": "100",
+									"description": "Maximum price filter"
+								},
+								{
+									"key": "offset",
+									"value": "0",
+									"description": "Pagination offset"
+								},
+								{
+									"key": "limit",
+									"value": "5",
+									"description": "Items per page"
+								}
+							]
+						},
+						"description": "Combine multiple filters: category, price, and pagination. All filters can be used together."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product by Code",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/catalog/PROD001",
+							"host": ["{{base_url}}"],
+							"path": ["catalog", "PROD001"]
+						},
+						"description": "Retrieve a specific product by its code. Returns product details including category and variants. Variants with no price inherit the product's base price."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product by Code - PROD002",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/catalog/PROD002",
+							"host": ["{{base_url}}"],
+							"path": ["catalog", "PROD002"]
+						},
+						"description": "Example: Get product PROD002"
+					},
+					"response": []
+				}
+			],
+			"description": "Product catalog endpoints for browsing and searching products"
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "Get All Categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/categories",
+							"host": ["{{base_url}}"],
+							"path": ["categories"]
+						},
+						"description": "Retrieve all available product categories. Returns a list of categories with their codes and names."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"code\": \"electronics\",\n  \"name\": \"Electronics\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/categories",
+							"host": ["{{base_url}}"],
+							"path": ["categories"]
+						},
+						"description": "Create a new product category. Both code and name are required. Code should be unique and lowercase."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Category - Home & Garden",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"code\": \"home-and-garden\",\n  \"name\": \"Home & Garden\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/categories",
+							"host": ["{{base_url}}"],
+							"path": ["categories"]
+						},
+						"description": "Example: Create category with special characters in name"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Category - Invalid (Missing Code)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Electronics\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/categories",
+							"host": ["{{base_url}}"],
+							"path": ["categories"]
+						},
+						"description": "Example: Invalid request - missing code field. Should return 400 Bad Request."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Category - Invalid (Missing Name)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"code\": \"electronics\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/categories",
+							"host": ["{{base_url}}"],
+							"path": ["categories"]
+						},
+						"description": "Example: Invalid request - missing name field. Should return 400 Bad Request."
+					},
+					"response": []
+				}
+			],
+			"description": "Category management endpoints"
+		},
+		{
+			"name": "Health Check",
+			"item": [
+				{
+					"name": "API Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/",
+							"host": ["{{base_url}}"],
+							"path": [""]
+						},
+						"description": "Check if the API server is running"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

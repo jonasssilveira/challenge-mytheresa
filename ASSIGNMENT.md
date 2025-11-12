@@ -17,9 +17,9 @@ Writing Idiomatic Go code is crucial, so we will focus on clarity and simplicity
      - Code (human-readable unique identifier)
      - Name (human-readable name)
    - There will be 3 categories: "Clothing", "Shoes", and "Accessories".
-     - _PROD001, PROD004, PROD007_ will belong to "Clothing".
-     - _PROD002, PROD006_ will belong to "Shoes".
-     - _PROD003, PROD005, PROD008_ will belong to "Accessories".
+     - PROD001, PROD004, PROD007 will belong to "Clothing".
+     - PROD002, PROD006 will belong to "Shoes".
+     - PROD003, PROD005, PROD008_ will belong to "Accessories".
    - Follow the pattern introduced for the migrations files, and the implementation of the gorm models.
 
 3. Update the catalog handler and relevant repositories to include the product category in the response.
