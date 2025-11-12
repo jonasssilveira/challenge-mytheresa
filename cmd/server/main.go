@@ -52,7 +52,7 @@ func main() {
 	}
 
 	go func() {
-		log.Printf("Starting server on http:
+		log.Printf("Starting server on http://%s", srv.Addr)
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			log.Fatalf("Server failed: %s", err)
 		}
